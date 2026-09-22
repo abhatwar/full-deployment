@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: sumo-backend
+
+spec:
+
+  # Production starts with 3 Pods
+  replicas: 3
+
+  template:
+
+    spec:
+
+      containers:
+
+        - name: sumo-backend
+
+          # Dummy production ECR image
+          image: 123456789012.dkr.ecr.ap-south-1.amazonaws.com/sumo-backend:production-latest

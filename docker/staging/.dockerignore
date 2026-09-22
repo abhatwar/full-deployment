@@ -1,0 +1,47 @@
+# ============================================
+# SUMO BACKEND - STAGING
+# Docker ignore file
+# ============================================
+
+# Git
+.git
+.gitignore
+
+# Dependencies
+node_modules
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Testing / coverage
+coverage
+.nyc_output
+
+# IDE files
+.vscode
+.idea
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Terraform files
+.terraform
+*.tfstate
+*.tfstate.*
+
+# Kubernetes deployment files
+deployment/kubernetes
+
+# Jenkins files
+deployment/jenkins
+
+# Local temporary files
+tmp
+temp

@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: sumo-backend
+
+spec:
+
+  # Default number of Pods
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: sumo-backend
+
+  template:
+
+    metadata:
+      labels:
+        app: sumo-backend
+
+    spec:
+
+      containers:
+
+        - name: sumo-backend
+
+          # Jenkins/Kustomize will replace this image
+          image: SUMO_ECR_IMAGE
+
+          ports:
+            - containerPort: 7050
+
+          # Environment variables
+          envFrom:
+            - configMapRef:
+                name: sumo-backend-config
+
+          # CPU and memory configuration
+          resources:
+
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+          # Check whether application is alive
+          livenessProbe:
+
+            httpGet:
+              path: /health
+              port: 7050
+
+            initialDelaySeconds: 20
+            periodSeconds: 10
+
+          # Check whether application is ready
+          readinessProbe:
+
+            httpGet:
+              path: /health
+              port: 7050
+
+            initialDelaySeconds: 10
+            periodSeconds: 5

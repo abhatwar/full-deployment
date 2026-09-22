@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: sumo-backend
+
+spec:
+
+  # Staging uses fewer replicas
+  replicas: 1
+
+  template:
+
+    spec:
+
+      containers:
+
+        - name: sumo-backend
+
+          # Dummy ECR image
+          image: 123456789012.dkr.ecr.ap-south-1.amazonaws.com/sumo-backend:staging-latest

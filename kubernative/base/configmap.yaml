@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: sumo-backend-config
+
+data:
+
+  # Application environment
+  NODE_ENV: "base"
+
+  # Node.js port
+  PORT: "7050"
+
+  # AWS region
+  AWS_REGION: "ap-south-1"
+
+  # Dummy S3 bucket
+  S3_BUCKET: "dummy-sumo-bucket"

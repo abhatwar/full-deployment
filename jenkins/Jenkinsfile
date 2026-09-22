@@ -1,0 +1,72 @@
+pipeline {
+
+    agent any
+
+    parameters {
+        choice(
+            name: 'ENVIRONMENT',
+            choices: ['staging', 'production'],
+            description: 'Choose the environment to deploy or rollback.'
+        )
+
+        choice(
+            name: 'ACTION',
+            choices: ['deploy', 'rollback'],
+            description: 'Choose whether to deploy or roll back the selected environment.'
+        )
+    }
+
+    environment {
+        AWS_REGION = "ap-south-1"
+        AWS_ACCOUNT_ID = "123456789012"
+        ECR_REPOSITORY = "sumo-backend"
+        IMAGE_NAME = "sumo-backend"
+    }
+
+    stages {
+
+        stage("Checkout") {
+            steps {
+                git branch: "prod_sumo",
+                    url: "https://github.com/example/sumo.git"
+            }
+        }
+
+        stage("Install Dependencies") {
+            steps {
+                sh """
+                    cd backend
+                    npm ci
+                """
+            }
+        }
+
+        stage("Test") {
+            steps {
+                sh """
+                    cd backend
+                    npm test
+                """
+            }
+        }
+
+        stage("Deploy or Rollback Selected Environment") {
+            steps {
+                sh """
+                    chmod +x deploy.sh
+                    ./deploy.sh ${ENVIRONMENT} ${ACTION}
+                """
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "${ACTION} to ${ENVIRONMENT} completed successfully."
+        }
+
+        failure {
+            echo "${ACTION} to ${ENVIRONMENT} failed."
+        }
+    }
+}

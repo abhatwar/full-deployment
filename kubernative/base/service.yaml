@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: sumo-backend
+
+spec:
+
+  # Send traffic to Pods having this label
+  selector:
+    app: sumo-backend
+
+  ports:
+
+    # Kubernetes Service port
+    - port: 80
+
+      # Application container port
+      targetPort: 7050
+
+  # Internal Kubernetes service
+  type: ClusterIP
