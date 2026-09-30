@@ -2,59 +2,47 @@ pipeline {
 
     agent any
 
-    parameters {
-        choice(
-            name: 'ENVIRONMENT',
-            choices: ['staging', 'production'],
-            description: 'Choose the environment to deploy or rollback.'
-        )
-
-        choice(
-            name: 'ACTION',
-            choices: ['deploy', 'rollback'],
-            description: 'Choose whether to deploy or roll back the selected environment.'
-        )
+    triggers {
+        githubPush()
     }
 
     environment {
-        AWS_REGION = "ap-south-1"
-        AWS_ACCOUNT_ID = "123456789012"
-        ECR_REPOSITORY = "sumo-backend"
-        IMAGE_NAME = "sumo-backend"
+        DEPLOY_ENVIRONMENT = "staging"
     }
 
     stages {
 
         stage("Checkout") {
             steps {
-                git branch: "prod_sumo",
-                    url: "https://github.com/example/sumo.git"
+                dir("app") {
+                    deleteDir()
+                    git branch: "master",
+                        url: "https://github.com/abhatwar/nearBy-Backend.git"
+                }
             }
         }
 
         stage("Install Dependencies") {
             steps {
-                sh """
-                    cd backend
-                    npm ci
-                """
+                dir("app") {
+                    sh "npm ci"
+                }
             }
         }
 
         stage("Test") {
             steps {
-                sh """
-                    cd backend
-                    npm test
-                """
+                dir("app") {
+                    sh "npm test --if-present"
+                }
             }
         }
 
-        stage("Deploy or Rollback Selected Environment") {
+        stage("Build and Deploy") {
             steps {
                 sh """
                     chmod +x deploy.sh
-                    ./deploy.sh ${ENVIRONMENT} ${ACTION}
+                    APP_DIR=app ./deploy.sh ${DEPLOY_ENVIRONMENT} deploy
                 """
             }
         }
@@ -62,11 +50,11 @@ pipeline {
 
     post {
         success {
-            echo "${ACTION} to ${ENVIRONMENT} completed successfully."
+            echo "Automatic deployment to ${DEPLOY_ENVIRONMENT} completed successfully."
         }
 
         failure {
-            echo "${ACTION} to ${ENVIRONMENT} failed."
+            echo "Automatic deployment to ${DEPLOY_ENVIRONMENT} failed."
         }
     }
 }

@@ -19,8 +19,9 @@ fi
 
 AWS_REGION="ap-south-1"
 AWS_ACCOUNT_ID="123456789012"
-ECR_REPOSITORY="sumo-backend"
+ECR_REPOSITORY="sumo-${ENVIRONMENT}"
 IMAGE_NAME="sumo-backend"
+APP_DIR="${APP_DIR:-.}"
 
 if [[ "$ACTION" == "deploy" ]]; then
   IMAGE_TAG="${ENVIRONMENT}-$(date +%Y%m%d-%H%M%S)"
@@ -38,7 +39,7 @@ if [[ "$ACTION" == "deploy" ]]; then
   docker build \
     -f "docker/${ENVIRONMENT}/Dockerfile" \
     -t "${IMAGE_NAME}:${IMAGE_TAG}" \
-    .
+    "${APP_DIR}"
 
   aws ecr get-login-password --region "${AWS_REGION}" \
     | docker login --username AWS --password-stdin "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
@@ -53,6 +54,8 @@ if [[ "$ACTION" == "deploy" ]]; then
   fi
 
   kubectl apply -k "kubernative/overlays/${ENVIRONMENT}"
+  kubectl set image deployment/sumo-backend \
+    "sumo-backend=${IMAGE_URI}"
   kubectl rollout status deployment/sumo-backend --timeout=180s
 
   echo "Deployment for ${ENVIRONMENT} completed successfully."
