@@ -1,5 +1,5 @@
 # ============================================================
-# SUMO - ECR REPOSITORY
+# nearBy - ECR REPOSITORY
 # ============================================================
 
 
@@ -12,8 +12,8 @@ resource "aws_ecr_repository" "this" {
   # Repository name
   #
   # Example:
-  # sumo-staging
-  # sumo-production
+  # nearby-staging
+  # nearby-production
   name = "${var.project_name}-${var.environment}"
 
 

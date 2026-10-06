@@ -1,5 +1,5 @@
 # ============================================
-# SUMO BACKEND - PRODUCTION
+# nearBy-Backend - PRODUCTION
 # ============================================
 
 # Change Node version according to your project

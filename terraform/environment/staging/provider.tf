@@ -14,6 +14,7 @@ terraform {
 }
 
 
+# Configure AWS credentials outside Terraform using an IAM role, AWS profile, or environment variables.
 provider "aws" {
 
   region = var.aws_region
@@ -22,7 +23,7 @@ provider "aws" {
 
     tags = {
 
-      Project = "SUMO"
+      Project = "nearBy"
 
       Environment = var.environment
 

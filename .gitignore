@@ -1,0 +1,15 @@
+# Local credentials and environment files
+.env
+.env.*
+!.env.example
+.aws/
+*.pem
+*.key
+
+# Terraform local data and state
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log

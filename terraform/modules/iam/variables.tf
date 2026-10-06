@@ -1,5 +1,5 @@
 # ============================================================
-# SUMO - IAM MODULE VARIABLES
+# nearBy - IAM MODULE VARIABLES
 # ============================================================
 
 variable "project_name" {

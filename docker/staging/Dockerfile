@@ -1,5 +1,5 @@
 # ============================================
-# SUMO BACKEND - STAGING
+# nearBy-Backend - STAGING
 # ============================================
 
 # Change Node version according to your project

@@ -1,5 +1,5 @@
 # ============================================================
-# SUMO - S3 BUCKET
+# nearBy - S3 BUCKET
 # ============================================================
 
 
@@ -14,7 +14,7 @@ resource "aws_s3_bucket" "this" {
   # For real project use something unique,
   # for example:
   #
-  # sumo-production-assets-123456
+  # nearby-production-assets-123456
 
   bucket = "${var.project_name}-${var.environment}-assets"
 

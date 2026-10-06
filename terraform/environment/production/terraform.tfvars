@@ -1,12 +1,12 @@
 # ============================================================
-# SUMO PRODUCTION TERRAFORM VARIABLES
+# nearBy PRODUCTION TERRAFORM VARIABLES
 # ============================================================
 
 # AWS region
 aws_region = "ap-south-1"
 
 # Project name
-project_name = "sumo"
+project_name = "nearby"
 
 # Environment
 environment = "production"

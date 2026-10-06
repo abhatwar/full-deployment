@@ -1,5 +1,5 @@
 # ============================================================
-# SUMO - ECR MODULE VARIABLES
+# nearBy - ECR MODULE VARIABLES
 # ============================================================
 
 variable "project_name" {

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: sumo-backend
+  name: nearby-backend
 
 spec:
 
@@ -15,7 +15,7 @@ spec:
 
       containers:
 
-        - name: sumo-backend
+        - name: nearby-backend
 
           # Dummy ECR image
-          image: 123456789012.dkr.ecr.ap-south-1.amazonaws.com/sumo-backend:staging-latest
+          image: 000000000000.dkr.ecr.ap-south-1.amazonaws.com/nearby-backend:staging-latest

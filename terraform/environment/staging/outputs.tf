@@ -1,6 +1,6 @@
 output "vpc_id" {
 
-  description = "SUMO VPC ID"
+  description = "nearBy VPC ID"
 
   value = module.vpc.vpc_id
 }
@@ -8,7 +8,7 @@ output "vpc_id" {
 
 output "public_subnet_ids" {
 
-  description = "SUMO public subnet IDs"
+  description = "nearBy public subnet IDs"
 
   value = module.vpc.public_subnet_ids
 }
@@ -16,7 +16,7 @@ output "public_subnet_ids" {
 
 output "private_subnet_ids" {
 
-  description = "SUMO private subnet IDs"
+  description = "nearBy private subnet IDs"
 
   value = module.vpc.private_subnet_ids
 }
@@ -24,7 +24,7 @@ output "private_subnet_ids" {
 
 output "nat_gateway_id" {
 
-  description = "SUMO NAT Gateway ID"
+  description = "nearBy NAT Gateway ID"
 
   value = module.vpc.nat_gateway_id
 }

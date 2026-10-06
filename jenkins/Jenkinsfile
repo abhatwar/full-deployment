@@ -1,5 +1,6 @@
 pipeline {
 
+    // Configure AWS access on this agent with an IAM role or Jenkins credentials; never store keys in this file.
     agent any
 
     triggers {

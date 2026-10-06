@@ -1,5 +1,5 @@
 # ============================================================
-# SUMO - SECURITY GROUPS
+# nearBy - SECURITY GROUPS
 # ============================================================
 
 
@@ -11,7 +11,7 @@ resource "aws_security_group" "alb" {
 
   name = "${var.project_name}-${var.environment}-alb-sg"
 
-  description = "Security group for SUMO Application Load Balancer"
+  description = "Security group for nearBy Application Load Balancer"
 
   vpc_id = var.vpc_id
 
@@ -84,7 +84,7 @@ resource "aws_security_group" "eks" {
 
   name = "${var.project_name}-${var.environment}-eks-sg"
 
-  description = "Security group for SUMO EKS workloads"
+  description = "Security group for nearBy EKS workloads"
 
   vpc_id = var.vpc_id
 
@@ -156,7 +156,7 @@ resource "aws_security_group" "rds" {
 
   name = "${var.project_name}-${var.environment}-rds-sg"
 
-  description = "Security group for SUMO database"
+  description = "Security group for nearBy database"
 
   vpc_id = var.vpc_id
 

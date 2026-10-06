@@ -1,5 +1,5 @@
 # ============================================================
-# SUMO - VPC VARIABLES
+# nearBy - VPC VARIABLES
 # ============================================================
 
 
@@ -13,7 +13,7 @@ variable "project_name" {
 
   type = string
 
-  default = "sumo"
+  default = "nearby"
 }
 
 

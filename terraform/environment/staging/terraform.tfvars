@@ -2,7 +2,7 @@
 aws_region = "ap-south-1"
 
 # Project name
-project_name = "sumo"
+project_name = "nearby"
 
 # Environment
 environment = "staging"

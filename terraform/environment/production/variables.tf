@@ -1,5 +1,5 @@
 # ============================================================
-# SUMO PRODUCTION - VARIABLES
+# nearBy PRODUCTION - VARIABLES
 # ============================================================
 
 
@@ -27,7 +27,7 @@ variable "project_name" {
 
   type = string
 
-  default = "sumo"
+  default = "nearby"
 }
 
 

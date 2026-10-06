@@ -1,5 +1,5 @@
 # ============================================================
-# SUMO - SECURITY GROUP VARIABLES
+# nearBy - SECURITY GROUP VARIABLES
 # ============================================================
 
 variable "project_name" {

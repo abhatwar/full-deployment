@@ -18,7 +18,7 @@ patches:
 # Production configuration
 configMapGenerator:
 
-  - name: sumo-backend-config
+  - name: nearby-backend-config
 
     behavior: replace
 
@@ -27,4 +27,4 @@ configMapGenerator:
       - NODE_ENV=production
       - PORT=7050
       - AWS_REGION=ap-south-1
-      - S3_BUCKET=sumo-production-bucket
+      - S3_BUCKET=nearby-production-assets

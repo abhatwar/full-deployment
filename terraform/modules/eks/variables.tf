@@ -1,5 +1,5 @@
 # ============================================================
-# SUMO - EKS MODULE VARIABLES
+# nearBy - EKS MODULE VARIABLES
 # ============================================================
 
 variable "project_name" {

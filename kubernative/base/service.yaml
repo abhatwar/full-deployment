@@ -2,13 +2,13 @@ apiVersion: v1
 kind: Service
 
 metadata:
-  name: sumo-backend
+  name: nearby-backend
 
 spec:
 
   # Send traffic to Pods having this label
   selector:
-    app: sumo-backend
+    app: nearby-backend
 
   ports:
 

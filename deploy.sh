@@ -18,12 +18,24 @@ if [[ "$ACTION" != "deploy" && "$ACTION" != "rollback" ]]; then
 fi
 
 AWS_REGION="ap-south-1"
-AWS_ACCOUNT_ID="123456789012"
-ECR_REPOSITORY="sumo-${ENVIRONMENT}"
-IMAGE_NAME="sumo-backend"
+PROJECT_NAME="nearby"
+ECR_REPOSITORY="${PROJECT_NAME}-${ENVIRONMENT}"
+EKS_CLUSTER_NAME="${PROJECT_NAME}-${ENVIRONMENT}-eks"
+IMAGE_NAME="nearby-backend"
 APP_DIR="${APP_DIR:-.}"
 
 if [[ "$ACTION" == "deploy" ]]; then
+  # AWS CLI credentials must be configured on the runner; never put access keys in this script.
+  AWS_ACCOUNT_ID="${AWS_ACCOUNT_ID:-$(aws sts get-caller-identity \
+    --region "$AWS_REGION" \
+    --query Account \
+    --output text)}"
+
+  if [[ ! "$AWS_ACCOUNT_ID" =~ ^[0-9]{12}$ ]]; then
+    echo "AWS_ACCOUNT_ID must be a 12-digit AWS account ID."
+    exit 1
+  fi
+
   IMAGE_TAG="${ENVIRONMENT}-$(date +%Y%m%d-%H%M%S)"
 
   echo "========================================"
@@ -53,10 +65,16 @@ if [[ "$ACTION" == "deploy" ]]; then
     exit 1
   fi
 
-  kubectl apply -k "kubernative/overlays/${ENVIRONMENT}"
-  kubectl set image deployment/sumo-backend \
-    "sumo-backend=${IMAGE_URI}"
-  kubectl rollout status deployment/sumo-backend --timeout=180s
+  aws eks update-kubeconfig \
+    --region "$AWS_REGION" \
+    --name "$EKS_CLUSTER_NAME"
+
+  kubectl kustomize --load-restrictor LoadRestrictionsNone \
+    "kubernative/overlays/${ENVIRONMENT}" \
+    | kubectl apply -f -
+  kubectl set image deployment/nearby-backend \
+    "nearby-backend=${IMAGE_URI}"
+  kubectl rollout status deployment/nearby-backend --timeout=180s
 
   echo "Deployment for ${ENVIRONMENT} completed successfully."
 else
@@ -64,8 +82,8 @@ else
   echo "Rolling back environment: ${ENVIRONMENT}"
   echo "========================================"
 
-  kubectl rollout undo deployment/sumo-backend
-  kubectl rollout status deployment/sumo-backend --timeout=180s
+  kubectl rollout undo deployment/nearby-backend
+  kubectl rollout status deployment/nearby-backend --timeout=180s
 
   echo "Rollback for ${ENVIRONMENT} completed successfully."
 fi

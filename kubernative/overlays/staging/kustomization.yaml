@@ -20,7 +20,7 @@ patches:
 # Staging configuration
 configMapGenerator:
 
-  - name: sumo-backend-config
+  - name: nearby-backend-config
 
     behavior: replace
 
@@ -29,4 +29,4 @@ configMapGenerator:
       - NODE_ENV=staging
       - PORT=7050
       - AWS_REGION=ap-south-1
-      - S3_BUCKET=sumo-staging-bucket
+      - S3_BUCKET=nearby-staging-assets

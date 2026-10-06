@@ -1,5 +1,5 @@
 # ============================================================
-# SUMO PRODUCTION - TERRAFORM PROVIDER
+# nearBy PRODUCTION - TERRAFORM PROVIDER
 # ============================================================
 
 terraform {
@@ -21,6 +21,7 @@ terraform {
 # AWS PROVIDER
 # ============================================================
 
+# Configure AWS credentials outside Terraform using an IAM role, AWS profile, or environment variables.
 provider "aws" {
 
   # AWS region comes from terraform.tfvars
@@ -31,7 +32,7 @@ provider "aws" {
 
     tags = {
 
-      Project     = "SUMO"
+      Project     = "nearBy"
       Environment = var.environment
       ManagedBy   = "Terraform"
     }

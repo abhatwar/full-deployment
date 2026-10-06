@@ -14,7 +14,7 @@ variable "project_name" {
 
   type = string
 
-  default = "sumo"
+  default = "nearby"
 }
 
 

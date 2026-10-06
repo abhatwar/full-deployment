@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: sumo-backend
+  name: nearby-backend
 
 spec:
 
@@ -11,30 +11,31 @@ spec:
 
   selector:
     matchLabels:
-      app: sumo-backend
+      app: nearby-backend
 
   template:
 
     metadata:
       labels:
-        app: sumo-backend
+        app: nearby-backend
 
     spec:
 
       containers:
 
-        - name: sumo-backend
+        - name: nearby-backend
 
           # Jenkins/Kustomize will replace this image
-          image: SUMO_ECR_IMAGE
+          image: NEARBY_ECR_IMAGE
 
           ports:
             - containerPort: 7050
 
+          # Grant S3 access with EKS Pod Identity or IRSA; do not add AWS keys to this manifest.
           # Environment variables
           envFrom:
             - configMapRef:
-                name: sumo-backend-config
+                name: nearby-backend-config
 
           # CPU and memory configuration
           resources:
